@@ -7,8 +7,7 @@ import BeachScreen from './src/views/BeachScreen';
 import SettingScreen from './src/views/SettingScreen';
 import MapScreen from './src/views/MapScreen';
 
-import i18n from './src/i18n/i18n';
-
+import './src/i18n/i18n';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,6 +24,8 @@ function TabScreen() {
 }
 
 export default function App(props) {
+  const { t } = useTranslation();
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -33,7 +34,7 @@ export default function App(props) {
           component={TabScreen}
           options={{ headerShown: false }} 
         />
-        <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen name="Map" component={MapScreen} options={{title: t('menu.map')}} />
       </Stack.Navigator>
     </NavigationContainer>
 

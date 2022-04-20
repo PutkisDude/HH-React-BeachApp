@@ -7,20 +7,23 @@ import { languageDetectorPlugin } from "./languageDetectorPlugin";
 i18n.use(initReactI18next)
     .use(languageDetectorPlugin).init({
     fallbackLng: 'en',
-    debug: true,
     compatibilityJSON: 'v3',
     supportedLngs: ["en", "fi"],
     react: {
-        useSuspense: false
+        useSuspense: false, // crash without
+        
+    },
+    interpolation: {
+        escapeValue: false, // against xss - react doesn't need this
     },
     
-
     resources: {
         en : {
             translation : {
                 'menu': {
                     'home' : 'Beach App',
                     'settings' : 'Settings',
+                    'map' : 'Map'
 
                 },
                 'settings' : {
@@ -28,6 +31,9 @@ i18n.use(initReactI18next)
                     'finnish' : 'Finnish',
                     'english' : 'English',
                     'tempUnit' : 'Temperature unit',
+                },
+                'beach' : {
+                    'distance' : 'Distance'
                 }
 
             }
@@ -37,17 +43,21 @@ i18n.use(initReactI18next)
                 'menu' : {
                     'home' : 'Rantasovellus',
                     'settings' : 'Asetukset',
+                    'map' : 'Kartta'
                 },
                 'settings' : {
                     'language' : 'Kieli',
                     'finnish' : 'Suomi',
                     'english' : 'Englanti',
                     'tempUnit' : 'Lämpötila-asteikko'
+                },
+                'beach' : {
+                    'distance' : 'Etäisyys'
                 }
 
             }
         }
-}
+},
 
 })
 

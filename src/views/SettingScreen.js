@@ -14,8 +14,9 @@ export default function SettingScreen() {
     const [language, setLanguage] = useState('en');
     const [checked, setChecked] = useState(false);
 
-    useEffect(() => {
-        console.log(getMultiple())
+    useEffect( async () => {
+        const lang = await getKey('settings.lang');
+        setLanguage(lang);
     }, []);
 
 
@@ -23,6 +24,11 @@ export default function SettingScreen() {
         setLanguage(lang);
         saveKey('settings.lang', lang);
         i18n.changeLanguage(lang);
+    }
+
+    const changeTempUnit = (temp) => {
+        setTempUnit(temp);
+        saveKey('settings.temp', temp);
     }
 
 
@@ -46,8 +52,7 @@ export default function SettingScreen() {
             <Text>{t('settings.tempUnit')}</Text>
             <Picker
                 selectedValue={tempUnit}
-                onValueChange={(itemValue) =>
-                setTempUnit(itemValue)
+                onValueChange={(itemValue) => changeTempUnit(itemValue)
             }>
                 <Picker.Item label="Celcius" value="c" />
                 <Picker.Item label="Fahrenheit" value="f" />

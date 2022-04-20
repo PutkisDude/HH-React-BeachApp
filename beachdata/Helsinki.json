@@ -1,0 +1,26 @@
+[
+    {
+    "url" : "https://iot.fvh.fi/opendata/uiras/003C62A8_v1.json",
+    "name": "Uunisaari",
+    "lat" : "60.15294",
+    "lon" : "24.94991"
+    },
+    {
+    "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001A97_v1.json",
+    "name" : "Kalasatama",
+    "lat" : "60.180724",
+    "lon" : "24.979968"
+    },
+    {
+    "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001AB9_v1.json",
+    "name": "Pikkukosken uimaranta",
+    "lat": "60.227704",
+    "lon": "24.983821"
+    },
+    {
+    "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001BBE_v1.json",
+    "name": "Rastilan uimaranta",
+    "lat": "60.207977",
+    "lon": "25.114849"
+    }
+]

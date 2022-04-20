@@ -1514,6 +1514,11 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
+"@types/geojson@^7946.0.7":
+  version "7946.0.8"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.8.tgz#30744afdb385e2945e22f3b033f897f76b1f12ca"
+  integrity sha512-1rkryxURpr6aWP7R786/UQOkJ3PcpQiWkAXBmdWc7ryFWqN6a4xfK7BtjXvFBKO9LjQ+MWQSWxYeZX1OApnArA==
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.5.tgz#21ffba0d98da4350db64891f92a9e5db3cdb4e15"
@@ -2951,6 +2956,11 @@ gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
   integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
+
+geolib@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/geolib/-/geolib-3.3.3.tgz#17f5a0dcdc0b051bd631b66f7131d2c14c54a15b"
+  integrity sha512-YO704pzdB/8QQekQuDmFD5uv5RAwAf4rOUPdcMhdEOz+HoPWD0sC7Qqdwb+LAvwIjXVRawx0QgZlocKYh8PFOQ==
 
 get-caller-file@^2.0.1:
   version "2.0.5"
@@ -4634,6 +4644,13 @@ react-native-localize@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-2.2.1.tgz#6fe646833691c6ee8a474df3c8b069402cb1dba8"
   integrity sha512-BuPaQWvxLZG1NrCDGqgAnecDrNQu3LED9/Pyl4H2LwTMHcEngXpE5PfVntW2GiLumdr6nUOkWmMnh8PynZqrsw==
+
+react-native-maps@0.29.4:
+  version "0.29.4"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.29.4.tgz#eb4a446104ed2aca5361422d06712f26d4c0d562"
+  integrity sha512-Td2KE8+KODcHOxfB1GBNnzFo4/89rlLiC7yTvqQZh0tGVrEzIcgSleUZRrjtq/WvSWSR4rql4AS+0VsBgDkYrw==
+  dependencies:
+    "@types/geojson" "^7946.0.7"
 
 react-native-ratings@^8.1.0:
   version "8.1.0"

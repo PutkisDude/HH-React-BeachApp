@@ -1,10 +1,22 @@
-import {View, Text} from 'react-native';
+import { useEffect } from 'react';
+import {View, Text, FlatList} from 'react-native';
+import Beach from '../Components/Beach';
 
-export default function BeachScreen() {
+import helsinki from '../../beachdata/Helsinki.json';
+
+export default function BeachScreen( { navigation } ) {
+
 
     return(
-        <View>
-            <Text>This is beach screen</Text>
+        <View style={{flex: 1}}>
+            <FlatList
+                data={helsinki}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item} ) =>
+                <Beach item={item} navigation={navigation} />
+                }
+            
+            />
         </View>
     )
 }

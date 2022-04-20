@@ -26,15 +26,15 @@ const saveKey = async (item, value) => {
   };
 
 
-  const getMultiple = async (data) => {
+  const getMultiple = async () => {
     try {
-      const savedData = await AsyncStorage.multiGet(data);
-      console.log(savedData);
-      return savedData;
+        const keys = await AsyncStorage.getAllKeys()
+        const items = await AsyncStorage.multiGet(keys)
+        return items
     } catch (error) {
-      console.log(error);
+        console.log(error, "problemo")
     }
-  };
+}
 
 
   module.exports = {saveKey, getKey, saveMultiple, getMultiple };
