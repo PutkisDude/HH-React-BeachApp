@@ -2,8 +2,11 @@ import { Button, ListItem, Text } from '@rneui/base';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getDistance, convertDistance } from 'geolib';
-import { getKey } from '../store/Store';
+import { getKey, saveKey } from '../store/Store';
 import * as Location from 'expo-location';
+import { Alert } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+
 
 
 export default function Beach(props, {navigation}) {
@@ -11,49 +14,74 @@ export default function Beach(props, {navigation}) {
 
     const [distance, setDistance] = useState(0);
     const [showDistance, setShowDistance] = useState('off');
+    const [showWaterTemp, setShowWaterTemp] = useState('off');
     const [location, setLocation] = useState(null);
-    
+    const [tempData, setTempData] = useState();
+    const isFocused = useIsFocused();
 
     useEffect(async () => {
 
+      if (showWaterTemp === 'on' && props.item.tmpin) getTemp();
+    }, [showWaterTemp])
+    
+    useEffect(async () => {
         const show = await getKey('settings.showDistance');
         setShowDistance(show);
-        console.log(show);
+        const water = await getKey('settings.showWater');
+        setShowWaterTemp(water);
+    })
 
-        if(show === 'on') {
+
+    useEffect(async () => {
+        if(showDistance === 'on') {
             (async () => {
                 let { status } = await Location.requestForegroundPermissionsAsync();
                 if (status !== 'granted') {
-                    console.log('no permission')
+                    saveKey('settings.showDistance', 'off');
+                    setShowDistance('off');
+                    Alert.alert('Permission', t('beach.noPermission'))
                   return;
                 }
-                let location = await Location.getCurrentPositionAsync({});
+                let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest});
                 setLocation(location);
 
-
                   let distance = await getDistance(
-                    {latitude : 60.252260 , longitude : 24.931120},
+                    {latitude : location.coords.latitude , longitude : location.coords.longitude},
                     {latitude : props.item.lat, longitude : props.item.lon}
                 );
                 setDistance(convertDistance(distance, 'km'));
 
               })();
 
-
         }
 
-      }, []);
+      }, [showDistance]);
 
-/*
-    useEffect(() => {
-        let distance = getDistance(
-            {latitude : 60.252260 , longitude : 24.931120},
-            {latitude : props.item.lat, longitude : props.item.lon}
-        );
-        setDistance(convertDistance(distance, 'km'));
+      const getTemp = async () => {
 
-    })
-    */
+        // Get data only once every 15mins
+        const cacheInMinutes = 15;
+        const cacheExpire = new Date();
+        cacheExpire.setMinutes(cacheExpire.getMinutes() + cacheInMinutes);
+        const lastFetchTime =  new Date(await getKey(`cache.${props.item.url}`));
+
+        if (lastFetchTime == null || lastFetchTime > cacheExpire) {
+          fetch(props.item.url)
+          .then(res => res.json())
+          .then((data) => {
+            if (!data || data.length == 0) throw new Error
+             saveKey(`cache.${props.item.url}`, new Date().toString());
+             saveKey(`data.${props.item.url}`, JSON.stringify(data.data[data.data.length-1]));
+            setTempData(data);
+            console.log('im not here')
+          })
+          .catch(error => console.log(error))
+        }else {
+          const data = JSON.parse(await getKey(`data.${props.item.url}`));
+          setTempData(data);
+          console.log(data.data[data.data.length-1]);
+        }
+      }
 
     return (
         <ListItem
@@ -63,10 +91,12 @@ export default function Beach(props, {navigation}) {
  
         >
               <ListItem.Content>
-                <ListItem.Title>{props.item.name}</ListItem.Title>
-                <ListItem.Subtitle>Water temp: ?</ListItem.Subtitle>
+                <ListItem.Title style={{fontSize: 18, color: 'red'}}>{props.item.name}</ListItem.Title>
+              { showWaterTemp === 'on' && tempData ? <ListItem.Subtitle style={{color: 'green', fontSize: 15}}>Air: {tempData.temp_air} °C</ListItem.Subtitle> : null }
+              { showWaterTemp === 'on' && tempData ? <ListItem.Subtitle style={{color: 'blue', fontSize: 15}}>Water: {tempData.temp_water} °C</ListItem.Subtitle> : null }
+
               </ListItem.Content>
-              { showDistance === 'on' ? <Text>{t('beach.distance')}: {distance.toFixed(2)}km </Text> : null }
+              { showDistance === 'on'  ? <Text style={{fontSize: 16}}>{t('beach.distance')}: {distance.toFixed(2)}km </Text> : null }
               <ListItem.Chevron />
 
         </ListItem>

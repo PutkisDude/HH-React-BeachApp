@@ -1,19 +1,22 @@
-import {View, Text} from 'react-native';
-import { Switch, CheckBox } from '@rneui/themed';
+import {View, Text, StyleSheet} from 'react-native';
+import { CheckBox } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
 import {saveKey, getKey} from '../store/Store';
 import i18n from '../i18n/i18n';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function SettingScreen() {
     const { t } = useTranslation();
 
     const [check1, setCheck1] = useState(false);
-    const [tempUnit, setTempUnit] = useState('c');
     const [language, setLanguage] = useState('en');
-    const [checked, setChecked] = useState(false);
     const [distance, setDistance] = useState('off'); // Async-storage supports only strings, could parse with false
+    const [showWater, setShowWater] = useState('off'); // Async-storage supports only strings, could parse with false
+
+    const isFocused = useIsFocused();
+
 
     useEffect( async () => {
         const lang = await getKey('settings.lang');
@@ -21,7 +24,7 @@ export default function SettingScreen() {
 
         const dist = await getKey('settings.showDistance');
         setDistance(dist);
-    }, []);
+    }, [isFocused]);
 
 
     const changeLanguage = (lang) => {
@@ -29,7 +32,7 @@ export default function SettingScreen() {
         saveKey('settings.lang', lang);
         i18n.changeLanguage(lang);
     }
-
+    /* TODO */
     const changeTempUnit = (temp) => {
         setTempUnit(temp);
         saveKey('settings.temp', temp);
@@ -39,15 +42,15 @@ export default function SettingScreen() {
         setDistance(bool);
         saveKey('settings.showDistance', bool);
     }
+    
+    const setShowWaterTemp = (bool) => {
+        setShowWater(bool);
+        saveKey('settings.showWater', bool);
+    }
 
 
     return(
-        <View>
-
-            <Switch
-               value={checked}
-               onValueChange={(value) => setChecked(value)}
-             />
+        <View style={styles.container}>
 
             <Text>{t('settings.language')}</Text>
             <Picker
@@ -65,35 +68,44 @@ export default function SettingScreen() {
                 <Picker.Item label={t('settings.show')} value="on" />
                 <Picker.Item label={t('settings.hide')} value="off" />
             </Picker>
-
-            <Text>{t('settings.tempUnit')}</Text>
+            <Text>{t('settings.showWater')}</Text>
             <Picker
-                selectedValue={tempUnit}
-                onValueChange={(itemValue) => changeTempUnit(itemValue)
-            }>
-                <Picker.Item label="Celcius" value="c" />
-                <Picker.Item label="Fahrenheit" value="f" />
+                selectedValue={showWater}
+                onValueChange={(itemValue) => setShowWaterTemp(itemValue)}
+            >
+                <Picker.Item label={t('settings.show')} value="on" />
+                <Picker.Item label={t('settings.hide')} value="off" />
             </Picker>
 
-    <CheckBox
-      center
-      title="Helsinki"
-      checked={check1}
-      onPress={() => setCheck1(!check1)}
-    />
-    <CheckBox
-      center
-      title="Espoo"
-      checked={check1}
-      onPress={() => setCheck1(!check1)}
-    />    
-    <CheckBox
-      center
-      title="Vantaa"
-      checked={check1}
-      onPress={() => setCheck1(!check1)}
-  />
+            <Text>{t('settings.cities')}</Text>
+
+            <CheckBox
+              center
+              title="Helsinki"
+              checked={check1}
+              onPress={() => setCheck1(!check1)}
+            />
+            <CheckBox
+              center
+              title="Espoo"
+              checked={check1}
+              onPress={() => setCheck1(!check1)}
+            />    
+            <CheckBox
+              center
+              title="Vantaa"
+              checked={check1}
+              onPress={() => setCheck1(!check1)}
+          />
 
         </View>
     )
 }
+
+var styles = StyleSheet.create({
+    container: {
+        padding: 10, 
+        paddingTop: 50
+    },
+
+});
