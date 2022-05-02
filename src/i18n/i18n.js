@@ -27,6 +27,10 @@ i18n.use(initReactI18next)
 
                 },
                 'settings' : {
+                    'show' : 'Show',
+                    'hide' : 'Don\'t show',
+                    'dontShow' : 'Hide',
+                    'distance' : 'Show distance (Require permission)',
                     'language' : 'Language',
                     'finnish' : 'Finnish',
                     'english' : 'English',
@@ -46,6 +50,9 @@ i18n.use(initReactI18next)
                     'map' : 'Kartta'
                 },
                 'settings' : {
+                    'show' : 'Näytä',
+                    'hide' : 'Älä näytä',
+                    'distance' : 'Näytä etäisyydet (vaatii luvan sijainnille)',
                     'language' : 'Kieli',
                     'finnish' : 'Suomi',
                     'english' : 'Englanti',

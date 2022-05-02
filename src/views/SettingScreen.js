@@ -3,7 +3,7 @@ import { Switch, CheckBox } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
-import {saveKey, getKey, getMultiple} from '../store/Store';
+import {saveKey, getKey} from '../store/Store';
 import i18n from '../i18n/i18n';
 
 export default function SettingScreen() {
@@ -13,10 +13,14 @@ export default function SettingScreen() {
     const [tempUnit, setTempUnit] = useState('c');
     const [language, setLanguage] = useState('en');
     const [checked, setChecked] = useState(false);
+    const [distance, setDistance] = useState('off'); // Async-storage supports only strings, could parse with false
 
     useEffect( async () => {
         const lang = await getKey('settings.lang');
         setLanguage(lang);
+
+        const dist = await getKey('settings.showDistance');
+        setDistance(dist);
     }, []);
 
 
@@ -29,6 +33,11 @@ export default function SettingScreen() {
     const changeTempUnit = (temp) => {
         setTempUnit(temp);
         saveKey('settings.temp', temp);
+    }
+
+    const setShowDistance = (bool) => {
+        setDistance(bool);
+        saveKey('settings.showDistance', bool);
     }
 
 
@@ -47,6 +56,14 @@ export default function SettingScreen() {
             >
                 <Picker.Item label={t('settings.finnish')} value="fi" />
                 <Picker.Item label={t('settings.english')} value="en" />
+            </Picker>
+            <Text>{t('settings.distance')}</Text>
+            <Picker 
+                selectedValue={distance}
+                onValueChange={(itemValue) => setShowDistance(itemValue)}
+            >
+                <Picker.Item label={t('settings.show')} value="on" />
+                <Picker.Item label={t('settings.hide')} value="off" />
             </Picker>
 
             <Text>{t('settings.tempUnit')}</Text>
