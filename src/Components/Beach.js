@@ -15,6 +15,7 @@ export default function Beach(props, {navigation}) {
     const [showWaterTemp, setShowWaterTemp] = useState('off');
     const [location, setLocation] = useState(null);
     const [tempData, setTempData] = useState();
+    const isFocused = useIsFocused();
 
     useEffect(async () => {
 
@@ -28,14 +29,26 @@ export default function Beach(props, {navigation}) {
         setShowWaterTemp(water);
     })
 
+
     useEffect(async () => {
         if(showDistance === 'on') {
-            (async () => {             
+            (async () => {
+                let { status } = await Location.requestForegroundPermissionsAsync();
+                if (status !== 'granted') {
+                    saveKey('settings.showDistance', 'off');
+                    setShowDistance('off');
+                    Alert.alert('Permission', t('beach.noPermission'))
+                  return;
+                }
+                let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest});
+                setLocation(location);
+
                   let distance = await getDistance(
-                    {latitude : props.userLocation.coords.latitude , longitude : props.userLocation.coords.longitude},
+                    {latitude : location.coords.latitude , longitude : location.coords.longitude},
                     {latitude : props.item.lat, longitude : props.item.lon}
                 );
                 setDistance(convertDistance(distance, 'km'));
+
               })();
 
         }
@@ -76,11 +89,11 @@ export default function Beach(props, {navigation}) {
         >
               <ListItem.Content>
                 <ListItem.Title style={{fontSize: 18, color: 'red'}}>{props.item.name}</ListItem.Title>
-              { showWaterTemp === 'on' && props.item.tmpin && tempData && <ListItem.Subtitle style={{color: 'green', fontSize: 15}}>{t('beach.air')}: {tempData.temp_air} °C</ListItem.Subtitle>  }
-              { showWaterTemp === 'on' && props.item.tmpin && tempData && <ListItem.Subtitle style={{color: 'blue', fontSize: 15}}>{t('beach.water')}: {tempData.temp_water} °C</ListItem.Subtitle>  }
+              { showWaterTemp === 'on' && props.item.tmpin && tempData ? <ListItem.Subtitle style={{color: 'green', fontSize: 15}}>{t('beach.air')}: {tempData.temp_air} °C</ListItem.Subtitle> : null }
+              { showWaterTemp === 'on' && props.item.tmpin && tempData ? <ListItem.Subtitle style={{color: 'blue', fontSize: 15}}>{t('beach.water')}: {tempData.temp_water} °C</ListItem.Subtitle> : null }
 
               </ListItem.Content>
-              { showDistance === 'on' && props.userLocation  && <Text style={{fontSize: 16}}>{t('beach.distance')}: {distance.toFixed(2)}km </Text> }
+              { showDistance === 'on'  ? <Text style={{fontSize: 16}}>{t('beach.distance')}: {distance.toFixed(2)}km </Text> : null }
               <ListItem.Chevron />
 
         </ListItem>
