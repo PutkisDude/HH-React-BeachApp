@@ -13,7 +13,7 @@ export default function SettingScreen() {
     const [check1, setCheck1] = useState(false);
     const [language, setLanguage] = useState('en');
     const [distance, setDistance] = useState('off'); // Async-storage supports only strings, could parse with false
-    const [showWater, setShowWater] = useState('off'); // Async-storage supports only strings, could parse with false
+    const [showTemps, setShowTemps] = useState('off'); // Async-storage supports only strings, could parse with false
 
     const isFocused = useIsFocused();
 
@@ -24,6 +24,9 @@ export default function SettingScreen() {
 
         const dist = await getKey('settings.showDistance');
         setDistance(dist);
+
+        const shTemp = await getKey('settings.showTemp')
+        setShowTemps(shTemp);
     }, [isFocused]);
 
 
@@ -38,9 +41,9 @@ export default function SettingScreen() {
         saveKey('settings.showDistance', bool);
     }
     
-    const setShowWaterTemp = (bool) => {
-        setShowWater(bool);
-        saveKey('settings.showWater', bool);
+    const setShowTemp = (bool) => {
+        setShowTemps(bool);
+        saveKey('settings.showTemp', bool);
     }
 
 
@@ -65,8 +68,8 @@ export default function SettingScreen() {
             </Picker>
             <Text>{t('settings.showWater')}</Text>
             <Picker
-                selectedValue={showWater}
-                onValueChange={(itemValue) => setShowWaterTemp(itemValue)}
+                selectedValue={showTemps}
+                onValueChange={(itemValue) => setShowTemp(itemValue)}
             >
                 <Picker.Item label={t('settings.show')} value="on" />
                 <Picker.Item label={t('settings.hide')} value="off" />

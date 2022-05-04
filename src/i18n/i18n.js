@@ -35,12 +35,14 @@ i18n.use(initReactI18next)
                     'finnish' : 'Finnish',
                     'english' : 'English',
                     'tempUnit' : 'Temperature unit',
-                    'showWater' : 'Show water temperature (use network)',
+                    'showWater' : 'Show beach temperatures (use network)',
                     'cities' : 'Cities to show'
                 },
                 'beach' : {
                     'noPermission' : 'Need permission to location. Distance setting turned off',
-                    'distance' : 'Distance'
+                    'distance' : 'Distance',
+                    'water' : 'Water',
+                    'air' : 'Air',
                 }
 
             }
@@ -60,14 +62,16 @@ i18n.use(initReactI18next)
                     'finnish' : 'Suomi',
                     'english' : 'Englanti',
                     'tempUnit' : 'Lämpötila-asteikko',
-                    'showWater' : 'Näytä veden lämpötilat (käyttää kaistaa)',
+                    'showWater' : 'Näytä rannan lämpötilat (käyttää kaistaa)',
                     'cities' : 'Näytettävät kaupungit'
 
 
                 },
                 'beach' : {
                     'noPermission' : 'Ei lupaa sijaintiin. Etäisyyttä ei voi näyttää.',
-                    'distance' : 'Etäisyys'
+                    'distance' : 'Etäisyys',
+                    'water' : 'Vesi',
+                    'air' : 'Ilma'
                 }
 
             }
