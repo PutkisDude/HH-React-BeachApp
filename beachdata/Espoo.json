@@ -1,0 +1,18 @@
+[
+    {
+        "id" : "e1",
+        "url" : "https://iot.fvh.fi/opendata/uiras/70B3D5705000504F_v1.json",
+        "name": "Hanikan uimaranta",
+        "lat" : "60.127797",
+        "lon" : "24.691871",
+        "tmpin" : true
+    },
+    {
+        "id": "e2",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000516A_v1.json",
+        "name": "Kattilajärvi",
+        "lat": "60.29904",
+        "lon": "24.61975",
+        "tmpin": true
+    }
+]

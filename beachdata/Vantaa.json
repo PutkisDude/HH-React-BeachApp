@@ -1,0 +1,18 @@
+[
+    {
+        "id" : "v1",
+        "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001ADA_v1.json",
+        "name": "Kuusijärvi",
+        "lat" : "60.313343",
+        "lon" : "25.113967",
+        "tmpin" : true
+    },
+    {
+        "id": "v2",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050001BA6_v1.json",
+        "name": "Vetokannas",
+        "lat": "60.27026",
+        "lon": "24.88056",
+        "tmpin": true
+    }
+]

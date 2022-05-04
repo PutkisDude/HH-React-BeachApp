@@ -32,11 +32,6 @@ export default function SettingScreen() {
         saveKey('settings.lang', lang);
         i18n.changeLanguage(lang);
     }
-    /* TODO */
-    const changeTempUnit = (temp) => {
-        setTempUnit(temp);
-        saveKey('settings.temp', temp);
-    }
 
     const setShowDistance = (bool) => {
         setDistance(bool);

@@ -1,30 +1,194 @@
 [
     {
-    "url" : "https://iot.fvh.fi/opendata/uiras/003C62A8_v1.json",
-    "name": "Uunisaari",
-    "lat" : "60.15294",
-    "lon" : "24.94991",
-    "tmpin" : true
+        "id" : "h1",
+        "url" : "https://iot.fvh.fi/opendata/uiras/003C62A8_v1.json",
+        "name": "Uunisaari",
+        "lat" : "60.15294",
+        "lon" : "24.94991",
+        "tmpin" : false
     },
     {
-    "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001A97_v1.json",
-    "name" : "Kalasatama",
-    "lat" : "60.180724",
-    "lon" : "24.979968",
-    "tmpin": true
+        "id": "h2",
+        "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001A97_v1.json",
+        "name" : "Kalasatama",
+        "lat" : "60.180724",
+        "lon" : "24.979968",
+        "tmpin": false
     },
     {
-    "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001AB9_v1.json",
-    "name": "Pikkukosken uimaranta",
-    "lat": "60.227704",
-    "lon": "24.983821",
-    "tmpin" : true
+        "id": "h3",
+        "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001AB9_v1.json",
+        "name": "Pikkukosken uimaranta",
+        "lat": "60.227704",
+        "lon": "24.983821",
+        "tmpin" : true
     },
     {
-    "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001BBE_v1.json",
-    "name": "Rastilan uimaranta",
-    "lat": "60.207977",
-    "lon": "25.114849",
-    "tmpin": true
+        "id": "h4",
+        "url" : "https://iot.fvh.fi/opendata/uiras/70B3D57050001BBE_v1.json",
+        "name": "Rastilan uimaranta",
+        "lat": "60.207977",
+        "lon": "25.114849",
+        "tmpin": true
+    },
+    {
+        "id": "h5",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050001AF1_v1.json",
+        "name": "Lauttasaari (Vaskiniemi)",
+        "lat": "60.1605",
+        "lon": "24.85241",
+        "tmpin": false
+    },
+    {
+        "id": "h6",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004740_v1.json",
+        "name": "Lapinlahti",
+        "lat": "60.167735",
+        "lon": "24.908833",
+        "tmpin": false
+    },
+    {
+        "id": "h7",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004C07_v1.json",
+        "name": "Sompasauna",
+        "lat": "60.175742",
+        "lon": "24.975318",
+        "tmpin": false
+    },
+    {
+        "id": "h8",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004D86_v1.json",
+        "name": "Pihlajasaari",
+        "lat": "60.140588",
+        "lon": "24.9157002",
+        "tmpin": false
+    },
+    {
+        "id": "h9",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004DF2_v1.json",
+        "name": "Eiranranta",
+        "lat": "60.15241",
+        "lon": "24.93135",
+        "tmpin": false
+    },
+    {
+        "id": "h10",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004DF8_v1.json",
+        "name": "Vasikkasaari",
+        "lat": "60.15232",
+        "lon": "25.01586",
+        "tmpin": false
+    },
+    {
+        "id": "h11",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004E0E_v1.json",
+        "name": "Marjaniemen uimaranta",
+        "lat": "60.198449",
+        "lon": "25.076416",
+        "tmpin": true
+    },
+    {
+        "id": "h12",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004FB9_v1.json",
+        "name": "Hietaniemi (Ourit)",
+        "lat": "60.1715",
+        "lon": "24.8983",
+        "tmpin": true
+    },
+    {
+        "id": "h13",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004FC2_v1.json",
+        "name": "Lauttasaaren ulkoilupuisto",
+        "lat": "60.14682",
+        "lon": "24.8907",
+        "tmpin": true
+    },
+    {
+        "id": "h14",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004FE1_v1.json",
+        "name": "Herttoniemi (Tuorinniemen uimalaituri)",
+        "lat": "60.18554",
+        "lon": "25.04012",
+        "tmpin": false
+    },
+    {
+        "id": "h15",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050004FE6_v1.json",
+        "name": "Vartiosaari (Reposalmen laituri)",
+        "lat": "60.1801",
+        "lon": "25.0686",
+        "tmpin": false
+    },
+    {
+        "id": "h16",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D57050005037_v1.json",
+        "name": "Eiranranta (Löyly)",
+        "lat": "60.1523",
+        "lon": "24.931",
+        "tmpin": false
+    },
+    {
+        "id": "h17",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000E653_v1.json",
+        "name": "Pikku-Huopalahti",
+        "lat": "60.197827",
+        "lon": "24.890244",
+        "tmpin": false
+    },
+    {
+        "id": "h18",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000E696_v1.json",
+        "name": "Töölönlahti",
+        "lat": "60.18021",
+        "lon": "24.9341",
+        "tmpin": false
+    },
+    {
+        "id": "h19",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000E6D1_v1.json",
+        "name": "Porvarinlahti",
+        "lat": "60.228068",
+        "lon": "25.185788",
+        "tmpin": false
+    },
+    {
+        "id": "h20",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000E6E6_v1.json",
+        "name": "Suomenlinna",
+        "lat": "60.141163",
+        "lon": "24.983775",
+        "tmpin": false
+    },
+    {
+        "id": "h21",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000E6F2_v1.json",
+        "name": "Lauttasaaren uimaranta",
+        "lat": "60.15271",
+        "lon": "24.862529",
+        "tmpin": false
+    },
+    {
+        "id": "h22",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000E6F9_v1.json",
+        "name": "Arabianranta",
+        "lat": "60.202336",
+        "lon": "24.98258",
+        "tmpin": false
+    },
+    {
+        "id": "h23",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000E703_v1.json",
+        "name": "Munkkiniemi",
+        "lat": "60.2004257",
+        "lon": "24.8554928",
+        "tmpin": false
+    },
+    {
+        "id": "h24",
+        "url": "https://iot.fvh.fi/opendata/uiras/70B3D5705000E70E_v1.json",
+        "name": "Aurinkolahden uimaranta",
+        "lat": "60.200447",
+        "lon": "25.156321",
+        "tmpin": false
     }
 ]

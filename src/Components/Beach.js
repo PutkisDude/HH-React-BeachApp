@@ -59,27 +59,26 @@ export default function Beach(props, {navigation}) {
 
       const getTemp = async () => {
 
-        // Get data only once every 15mins
-        const cacheInMinutes = 15;
-        const cacheExpire = new Date();
-        cacheExpire.setMinutes(cacheExpire.getMinutes() + cacheInMinutes);
-        const lastFetchTime =  new Date(await getKey(`cache.${props.item.url}`));
+        // Cache - Get data only once every 15mins
+        const cacheInMinutes = 1000 * 60 * 15;
+        const fetchTime =  await getKey(`cache.${props.item.id}`);
+        const lastFetchTime = fetchTime ? new Date(fetchTime) : null;
 
-        if (lastFetchTime == null || lastFetchTime > cacheExpire) {
+        if (lastFetchTime == null || Date.now() > lastFetchTime.getTime() + cacheInMinutes) {
           fetch(props.item.url)
           .then(res => res.json())
           .then((data) => {
             if (!data || data.length == 0) throw new Error
-             saveKey(`cache.${props.item.url}`, new Date().toString());
-             saveKey(`data.${props.item.url}`, JSON.stringify(data.data[data.data.length-1]));
+            console.log(data);
+             saveKey(`cache.${props.item.id}`, new Date().toString());
+             saveKey(`data.${props.item.id}`, JSON.stringify(data.data[data.data.length-1]));
             setTempData(data);
             console.log('im not here')
           })
           .catch(error => console.log(error))
         }else {
-          const data = JSON.parse(await getKey(`data.${props.item.url}`));
+          const data = JSON.parse(await getKey(`data.${props.item.id}`));
           setTempData(data);
-          console.log(data.data[data.data.length-1]);
         }
       }
 
@@ -92,8 +91,8 @@ export default function Beach(props, {navigation}) {
         >
               <ListItem.Content>
                 <ListItem.Title style={{fontSize: 18, color: 'red'}}>{props.item.name}</ListItem.Title>
-              { showWaterTemp === 'on' && tempData ? <ListItem.Subtitle style={{color: 'green', fontSize: 15}}>Air: {tempData.temp_air} °C</ListItem.Subtitle> : null }
-              { showWaterTemp === 'on' && tempData ? <ListItem.Subtitle style={{color: 'blue', fontSize: 15}}>Water: {tempData.temp_water} °C</ListItem.Subtitle> : null }
+              { showWaterTemp === 'on' && props.item.tmpin && tempData ? <ListItem.Subtitle style={{color: 'green', fontSize: 15}}>Air: {tempData.temp_air} °C</ListItem.Subtitle> : null }
+              { showWaterTemp === 'on' && props.item.tmpin && tempData ? <ListItem.Subtitle style={{color: 'blue', fontSize: 15}}>Water: {tempData.temp_water} °C</ListItem.Subtitle> : null }
 
               </ListItem.Content>
               { showDistance === 'on'  ? <Text style={{fontSize: 16}}>{t('beach.distance')}: {distance.toFixed(2)}km </Text> : null }
