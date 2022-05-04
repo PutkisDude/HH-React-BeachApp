@@ -1,64 +1,35 @@
-import { Button, ListItem, Text } from '@rneui/base';
+import { ListItem, Text } from '@rneui/base';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getDistance, convertDistance } from 'geolib';
 import { getKey, saveKey } from '../store/Store';
-import * as Location from 'expo-location';
-import { Alert } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
 
-export default function Beach(props, {navigation}) {
+export default function Beach(props) {
     const { t } = useTranslation();
 
     const [distance, setDistance] = useState(0);
-    const [showDistance, setShowDistance] = useState('off');
-    const [showWaterTemp, setShowWaterTemp] = useState('off');
-    const [location, setLocation] = useState(null);
     const [tempData, setTempData] = useState();
-    const isFocused = useIsFocused();
+    const [loading, setLoading] = useState(true);
 
     useEffect(async () => {
+      setLoading(true);
+      if (props.dist === 'on') await getDist();
+      if (props.temp === 'on' && props.item.tmpin) await getTemp();
+      setLoading(false);
+    }, [props.dist])
 
-      if (showWaterTemp === 'on' && props.item.tmpin) getTemp();
-    }, [showWaterTemp])
-    
-    useEffect(async () => {
-        const show = await getKey('settings.showDistance');
-        setShowDistance(show);
-        const water = await getKey('settings.showTemp');
-        setShowWaterTemp(water);
-    })
-
-
-    useEffect(async () => {
-        if(showDistance === 'on') {
-            (async () => {
-                let { status } = await Location.requestForegroundPermissionsAsync();
-                if (status !== 'granted') {
-                    saveKey('settings.showDistance', 'off');
-                    setShowDistance('off');
-                    Alert.alert('Permission', t('beach.noPermission'))
-                  return;
-                }
-                let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest});
-                setLocation(location);
-
-                  let distance = await getDistance(
-                    {latitude : location.coords.latitude , longitude : location.coords.longitude},
-                    {latitude : props.item.lat, longitude : props.item.lon}
-                );
-                setDistance(convertDistance(distance, 'km'));
-
-              })();
-
-        }
-
-      }, [showDistance]);
+      const getDist = async () => {
+        let distance = getDistance(
+          {latitude : props.userLocation.coords.latitude , longitude : props.userLocation.coords.longitude},
+          {latitude : props.item.lat, longitude : props.item.lon}
+        );
+        setDistance(convertDistance(distance, 'km'));
+    }
 
       const getTemp = async () => {
 
         // Cache - Get data only once every 15mins
-        const cacheInMinutes = 1000 * 60 * 15;
+        const cacheInMinutes = 1000 * 60 * 120;
         const fetchTime =  await getKey(`cache.${props.item.id}`);
         const lastFetchTime = fetchTime ? new Date(fetchTime) : null;
 
@@ -71,7 +42,6 @@ export default function Beach(props, {navigation}) {
              saveKey(`cache.${props.item.id}`, new Date().toString());
              saveKey(`data.${props.item.id}`, JSON.stringify(data.data[data.data.length-1]));
             setTempData(data);
-            console.log('im not here')
           })
           .catch(error => console.log(error))
         }else {
@@ -79,6 +49,9 @@ export default function Beach(props, {navigation}) {
           setTempData(data);
         }
       }
+
+
+    if(loading) return <></>
 
     return (
         <ListItem
@@ -89,11 +62,11 @@ export default function Beach(props, {navigation}) {
         >
               <ListItem.Content>
                 <ListItem.Title style={{fontSize: 18, color: 'red'}}>{props.item.name}</ListItem.Title>
-              { showWaterTemp === 'on' && props.item.tmpin && tempData ? <ListItem.Subtitle style={{color: 'green', fontSize: 15}}>{t('beach.air')}: {tempData.temp_air} °C</ListItem.Subtitle> : null }
-              { showWaterTemp === 'on' && props.item.tmpin && tempData ? <ListItem.Subtitle style={{color: 'blue', fontSize: 15}}>{t('beach.water')}: {tempData.temp_water} °C</ListItem.Subtitle> : null }
+              { props.temp === 'on' && props.item.tmpin && tempData ? <ListItem.Subtitle style={{color: 'green', fontSize: 15}}>{t('beach.air')}: {tempData.temp_air} °C</ListItem.Subtitle> : null }
+              { props.temp === 'on' && props.item.tmpin && tempData ? <ListItem.Subtitle style={{color: 'blue', fontSize: 15}}>{t('beach.water')}: {tempData.temp_water} °C</ListItem.Subtitle> : null }
 
               </ListItem.Content>
-              { showDistance === 'on'  ? <Text style={{fontSize: 16}}>{t('beach.distance')}: {distance.toFixed(2)}km </Text> : null }
+              { props.dist === 'on'  ? <Text style={{fontSize: 16}}>{t('beach.distance')}: {distance.toFixed(2)}km </Text> : null }
               <ListItem.Chevron />
 
         </ListItem>
