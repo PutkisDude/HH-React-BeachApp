@@ -7,16 +7,27 @@ import { getKey, saveKey } from '../store/Store';
 export default function Beach(props) {
     const { t } = useTranslation();
 
-    const [distance, setDistance] = useState(0);
+    const [distance, setDistance] = useState();
     const [tempData, setTempData] = useState();
-    const [loading, setLoading] = useState(true);
+    const [tempLoaded, setTempLoaded] = useState(false);
+    const [distLoaded, setDistLoaded] = useState(false);
 
-    useEffect(async () => {
-      setLoading(true);
-      if (props.dist === 'on') await getDist();
-      if (props.temp === 'on' && props.item.tmpin) await getTemp();
-      setLoading(false);
-    }, [props.dist])
+    useEffect(() => {
+
+      const load = async () => {
+        const showDist = await getKey('settings.showDistance');
+        if (showDist === 'on') {
+          await getDist().catch(e => console.log(e));
+        }
+        setDistLoaded(true);
+        const showTemp = await getKey('settings.showTemp');
+        if(showTemp === 'on' && props.item.tmpin){
+          await getTemp();
+        }
+        setTempLoaded(true);
+    }
+    load();
+    },[])
 
       const getDist = async () => {
         let distance = getDistance(
@@ -51,7 +62,7 @@ export default function Beach(props) {
       }
 
 
-    if(loading) return <></>
+    if(!distLoaded || !tempLoaded) return <></>
 
     return (
         <ListItem

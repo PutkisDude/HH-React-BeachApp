@@ -16,18 +16,20 @@ export default function BeachScreen( { navigation } ) {
     const [userLocation, setUserLocation] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(async () => {
-        const show = await getKey('settings.showDistance');
-        setShowDistance(show);
-        const water = await getKey('settings.showTemp');
-        setShowTemp(water);
-    })
-
-    useEffect(async () => {
+    useEffect(() => {
         setLoading(true);
-        if(showDistance === 'on') await getUserLocation();
-        setLoading(false);
-      }, [showDistance]);
+        const loadUserLocation = async () => {
+            const show = await getKey('settings.showDistance');
+            if (show === 'on') {
+                await getUserLocation();
+            }
+            setShowDistance(show);
+
+            setLoading(false);
+        }
+        loadUserLocation();
+    }, [isFocused])
+
 
     const getUserLocation = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -41,7 +43,7 @@ export default function BeachScreen( { navigation } ) {
             setUserLocation(location);
     }
 
-    if(loading) return (<Text>Loading</Text>)
+    if(loading) return <></>
 
     return(
         <View style={{flex: 1}}>
