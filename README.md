@@ -36,12 +36,12 @@ Beach App on mobiilisovellus, joka listaa helsingin rantoja. Sovelluksen avulla 
     "react-native-web": "0.17.1"
   },
   ```
-    - Expo-localization hakee käyttäjän puhelimen käyttökielen
-    - Expo-location hakee käyttäjän sijainnin
-    - Geolib laskee etäisyydet käyttäjästä rantaan
-    - i18next lisää monikielisyyden
-    - Async-Storage tallentaa sovelluksen asetukset ja rantojen lämpötilat välimuistiin (hakee vain 15min välein internetistä)
-    - rneui (react-native-elements) listan tyylittelyyn
+- Expo-localization hakee käyttäjän puhelimen käyttökielen
+- Expo-location hakee käyttäjän sijainnin
+- Geolib laskee etäisyydet käyttäjästä rantaan
+- i18next lisää monikielisyyden
+- Async-Storage tallentaa sovelluksen asetukset ja rantojen lämpötilat välimuistiin (hakee vain 15min välein internetistä)
+- rneui (react-native-elements) listan tyylittelyyn
 
 ## Kuvia
 
