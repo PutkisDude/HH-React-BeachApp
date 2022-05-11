@@ -22,7 +22,6 @@ function TabScreen() {
     )
   }
 
-
 export default function Navigation() {
 
     return(

@@ -1,5 +1,4 @@
 import {View, Text, StyleSheet} from 'react-native';
-import { CheckBox } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
@@ -9,13 +8,12 @@ import i18n from '../i18n/i18n';
 export default function SettingScreen() {
     const { t } = useTranslation();
 
-    const [check1, setCheck1] = useState();
     const [language, setLanguage] = useState(null);
     const [distance, setDistance] = useState(null); // Async-storage supports only strings, tho could parse to boolean
     const [showTemps, setShowTemps] = useState(null); // Async-storage supports only strings, tho could parse to boolean
 
 
-
+    // Load settings from async-storage
     useEffect( async () => {
         const lang = await getKey('settings.lang');
         setLanguage(lang);
@@ -25,11 +23,7 @@ export default function SettingScreen() {
 
         const shTemp = await getKey('settings.showTemp')
         setShowTemps(shTemp);
-
-        const test = await getKey('settings.showTest')
-        setCheck1(test)
     }, []);
-
 
     const changeLanguage = (lang) => {
         setLanguage(lang);
@@ -46,7 +40,6 @@ export default function SettingScreen() {
         setShowTemps(bool);
         saveKey('settings.showTemp', bool);
     }
-
 
     return(
         <View style={styles.container}>
@@ -75,28 +68,6 @@ export default function SettingScreen() {
                 <Picker.Item label={t('settings.show')} value="on" />
                 <Picker.Item label={t('settings.hide')} value="off" />
             </Picker>
-
-            <Text>{t('settings.cities')}</Text>
-
-            <CheckBox
-              center
-              title="Helsinki"
-              checked={check1}
-              onPress={() => setCheck1(!check1)}
-            />
-            <CheckBox
-              center
-              title="Espoo"
-              checked={check1}
-              onPress={() => setCheck1(!check1)}
-            />    
-            <CheckBox
-              center
-              title="Vantaa"
-              checked={check1}
-              onPress={() => setCheck1(!check1)}
-          />
-
         </View>
     )
 }

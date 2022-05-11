@@ -34,18 +34,15 @@ export default function BeachScreen( { navigation } ) {
         loadUserLocation();
     }, [])
 
-
+    // Check if changes in settings
     useEffect(() => {
         if (isFocused){
-            console.log('hello')
-        const loadKeys = async () => {
-            let distanceSetting = await getKey('settings.showDistance');
-            setShowDistance(distanceSetting);
-            if (distanceSetting == 'on') getUserLocation();
-
-            setShowTemp(await getKey('settings.showTemp'));
-            
-        }
+            const loadKeys = async () => {
+               let distanceSetting = await getKey('settings.showDistance');
+               setShowDistance(distanceSetting);
+               if (distanceSetting == 'on') getUserLocation();
+               setShowTemp(await getKey('settings.showTemp'));
+            }
         loadKeys();
     }
     }, [isFocused])

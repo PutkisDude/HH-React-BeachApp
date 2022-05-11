@@ -15,7 +15,7 @@ export default function Beach(props) {
       const load = async () => {
         const showDist = await getKey('settings.showDistance');
         const showTemp = await getKey('settings.showTemp');
-        if (showDist === 'on') {
+        if (showDist === 'on' && props.userLocation) {
           await getDist().catch(e => console.log(e));
         }      
         if(showTemp === 'on' && props.item.tmpin){
@@ -27,26 +27,26 @@ export default function Beach(props) {
     load();
   },[props.temp, props.dist, props.userLocation])
     
-      const getDist = async () => {
-        let distance = getDistance(
-          {latitude : props.userLocation.coords.latitude , longitude : props.userLocation.coords.longitude},
-          {latitude : props.item.lat, longitude : props.item.lon}
-        );
-        if(distance > 1000){
-          distance = convertDistance(distance, 'km').toFixed(2);
-          setDistance(distance + ' km');
-        }else{
-          distance = distance + ' m'
-          setDistance(distance);
-        }
+    
+  const getDist = async () => {
+      let distance = getDistance(
+        {latitude : props.userLocation.coords.latitude , longitude : props.userLocation.coords.longitude},
+        {latitude : props.item.lat, longitude : props.item.lon}
+      );
+      if(distance > 1000){
+        distance = convertDistance(distance, 'km').toFixed(2);
+        setDistance(distance + ' km');
+      }else{
+        distance = distance + ' m'
+        setDistance(distance);
+      }
     }
 
       const getTemperature = async () => {
         // Cache - Get data only once every 15mins
-        const cacheInMinutes = 1000 * 60 * 155;
+        const cacheInMinutes = 1000 * 60 * 15;
         const fetchTime =  await getKey(`cache.${props.item.id}`);
         const lastFetchTime = fetchTime ? new Date(fetchTime) : null;
-        // if(1 == 1) { // Testing-purposes
         if (lastFetchTime == null || Date.now() > lastFetchTime.getTime() + cacheInMinutes) {
           await fetch(props.item.url)
           .then(res => res.json())
