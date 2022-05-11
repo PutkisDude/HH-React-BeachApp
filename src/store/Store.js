@@ -17,26 +17,6 @@ const saveKey = async (item, value) => {
     }
   }
 
-  const saveMultiple = async (data) => {
-    try {
-      await AsyncStorage.multiSet(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-
-  const getMultiple = async () => {
-    try {
-        const keys = await AsyncStorage.getAllKeys()
-        const items = await AsyncStorage.multiGet(keys)
-        return items
-    } catch (error) {
-        console.log(error, "problemo")
-    }
-}
-
-
-  module.exports = {saveKey, getKey, saveMultiple, getMultiple };
+  module.exports = {saveKey, getKey };
 
   

@@ -24,7 +24,6 @@ i18n.use(initReactI18next)
                     'home' : 'Beach App',
                     'settings' : 'Settings',
                     'map' : 'Map'
-
                 },
                 'settings' : {
                     'show' : 'Show',
@@ -38,13 +37,15 @@ i18n.use(initReactI18next)
                     'showWater' : 'Show beach temperatures (use network)',
                     'cities' : 'Cities to show'
                 },
+                'list' : {
+                    'place' : 'Place',
+                    'distance' : 'Distance'
+                },
                 'beach' : {
                     'noPermission' : 'Need permission to location. Distance setting turned off',
-                    'distance' : 'Distance',
                     'water' : 'Water',
                     'air' : 'Air',
                 }
-
             }
         },
         fi : {
@@ -62,18 +63,18 @@ i18n.use(initReactI18next)
                     'finnish' : 'Suomi',
                     'english' : 'Englanti',
                     'tempUnit' : 'Lämpötila-asteikko',
-                    'showWater' : 'Näytä rannan lämpötilat (käyttää kaistaa)',
+                    'showWater' : 'Näytä rannan lämpötilat (käyttää mobiilikaistaa)',
                     'cities' : 'Näytettävät kaupungit'
-
-
+                },
+                'list' : {
+                    'place' : 'Paikka',
+                    'distance' : 'Etäisyys'
                 },
                 'beach' : {
                     'noPermission' : 'Ei lupaa sijaintiin. Etäisyyttä ei voi näyttää.',
-                    'distance' : 'Etäisyys',
                     'water' : 'Vesi',
                     'air' : 'Ilma'
                 }
-
             }
         }
 },

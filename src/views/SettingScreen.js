@@ -5,17 +5,15 @@ import { Picker } from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
 import {saveKey, getKey} from '../store/Store';
 import i18n from '../i18n/i18n';
-import { useIsFocused } from '@react-navigation/native';
 
 export default function SettingScreen() {
     const { t } = useTranslation();
 
-    const [check1, setCheck1] = useState(false);
-    const [language, setLanguage] = useState('en');
-    const [distance, setDistance] = useState('off'); // Async-storage supports only strings, could parse with false
-    const [showTemps, setShowTemps] = useState('off'); // Async-storage supports only strings, could parse with false
+    const [check1, setCheck1] = useState();
+    const [language, setLanguage] = useState(null);
+    const [distance, setDistance] = useState(null); // Async-storage supports only strings, tho could parse to boolean
+    const [showTemps, setShowTemps] = useState(null); // Async-storage supports only strings, tho could parse to boolean
 
-    const isFocused = useIsFocused();
 
 
     useEffect( async () => {
@@ -27,7 +25,10 @@ export default function SettingScreen() {
 
         const shTemp = await getKey('settings.showTemp')
         setShowTemps(shTemp);
-    }, [isFocused]);
+
+        const test = await getKey('settings.showTest')
+        setCheck1(test)
+    }, []);
 
 
     const changeLanguage = (lang) => {
@@ -55,8 +56,8 @@ export default function SettingScreen() {
                 selectedValue={language}
                 onValueChange={(itemValue) => changeLanguage(itemValue)}
             >
-                <Picker.Item label={t('settings.finnish')} value="fi" />
                 <Picker.Item label={t('settings.english')} value="en" />
+                <Picker.Item label={t('settings.finnish')} value="fi" />
             </Picker>
             <Text>{t('settings.distance')}</Text>
             <Picker 
