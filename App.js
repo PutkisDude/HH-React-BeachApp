@@ -7,6 +7,9 @@ import BeachScreen from './src/views/BeachScreen';
 import SettingScreen from './src/views/SettingScreen';
 import MapScreen from './src/views/MapScreen';
 
+import { Feather } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+
 import './src/i18n/i18n';
 
 const Stack = createNativeStackNavigator();
@@ -17,8 +20,24 @@ function TabScreen() {
 
   return(
   <Tab.Navigator>
-    <Tab.Screen name="Home" component={BeachScreen} options={{title: t('menu.home')}} />
-    <Tab.Screen name="Settings" component={SettingScreen} options={{ title: t('menu.settings' )} } />
+    <Tab.Screen 
+      name="Home" 
+      component={BeachScreen} 
+      options={{
+        title: t('menu.home'), 
+        tabBarIcon: () => (<FontAwesome5 name="umbrella-beach" size={20} color="black" />), 
+        tabBarLabelStyle: {fontSize:18}
+        }} 
+      />
+    <Tab.Screen 
+      name="Settings" 
+      component={SettingScreen} 
+      options={{ 
+        title: t('menu.settings' ), 
+        tabBarIcon: () => (<Feather name="settings" size={20} color="black" />),
+        tabBarLabelStyle: {fontSize: 18}
+      }} 
+      />
   </Tab.Navigator>
   )
 }

@@ -9,8 +9,8 @@ export default function SettingScreen() {
     const { t } = useTranslation();
 
     const [language, setLanguage] = useState(null);
-    const [distance, setDistance] = useState(null); // Async-storage supports only strings, tho could parse to boolean
-    const [showTemps, setShowTemps] = useState(null); // Async-storage supports only strings, tho could parse to boolean
+    const [distance, setDistance] = useState('off'); // Async-storage supports only strings, tho could parse to boolean
+    const [showTemps, setShowTemps] = useState('off'); // Async-storage supports only strings, tho could parse to boolean
 
 
     // Load settings from async-storage

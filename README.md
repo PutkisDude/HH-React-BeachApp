@@ -62,3 +62,8 @@ Beach App on mobiilisovellus, joka listaa helsingin rantoja. Sovelluksen avulla 
 ![asetukset](./screenshots/settings.png)
 
 </details>
+
+
+## Lämpötilojen lähde
+
+ [Veden reaaliaikainen lämpötila pääkaupunkiseudun uimarannoilla](https://hri.fi/data/fi/dataset/veden-reaaliaikainen-lampotila-helsingin-uimarannoilla). Aineiston ylläpitäjä on Forum Virium Helsinki Oy. Aineisto on ladattu [Helsinki Region Infoshare](https://hri.fi/) -palvelusta 11.05.2022 lisenssillä [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
