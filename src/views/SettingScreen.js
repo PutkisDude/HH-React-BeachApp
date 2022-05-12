@@ -8,7 +8,7 @@ import i18n from '../i18n/i18n';
 export default function SettingScreen() {
     const { t } = useTranslation();
 
-    const [language, setLanguage] = useState(null);
+    const [language, setLanguage] = useState('en');
     const [distance, setDistance] = useState('off'); // Async-storage supports only strings, tho could parse to boolean
     const [showTemps, setShowTemps] = useState('off'); // Async-storage supports only strings, tho could parse to boolean
 
